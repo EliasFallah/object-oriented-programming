@@ -7,7 +7,15 @@
 	},
 	"features": {
 		"ghcr.io/devcontainers/features/git:1": {}
-	}
+	},
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+		  // Add the IDs of extensions you want installed when the container is created.
+		  "extensions": ["ms-vscode.cpptools-extension-pack"]
+		  
+		}
+	  }
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},

@@ -8,18 +8,35 @@ int main() {
     int bestOverCable = 0;
     double bestPrice = 0;
     bool bestPriceSet = false;
-    int riverWidth = 500;
+
+    int riverWidth;
+    int factoryDistance;
+    int underCableCost;
+    int overCableCost;
+
+    cout << "Width of the river: " << endl;
+    cin >> riverWidth;
+
+    cout << "Distance to the factory: " << endl;
+    cin >> factoryDistance;
+
+    cout << "Price per meter of overland cable: " << endl;
+    cin >> overCableCost;
+
+    cout << "Price per meter of underwater cable: " << endl;
+    cin >> underCableCost;
+
     int sqrRiverWidth = riverWidth * riverWidth;
     // iterate through all lengths of over land cable
-    for (int overCable = 1; overCable <= 8000; overCable += 100){
+    for (int overCable = 1; overCable <= factoryDistance; overCable += 100){
         // Calcxulate the length of the under water cable
         int underCableLength = 8000 - overCable;
         int sqrUnderCableLength = underCableLength * underCableLength;
         double underCable = sqrt(sqrRiverWidth + sqrUnderCableLength);
 
         // Calculate the price of the cable run
-        double overCablePrice = overCable * 70;
-        double underCablePrice = underCable * 90;
+        double overCablePrice = overCable * overCableCost;
+        double underCablePrice = underCable * underCableCost;
         double totalPrice = overCablePrice + underCablePrice;
 
         // checks if the calculated price is lower then the best price

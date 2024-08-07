@@ -27,7 +27,16 @@ int search(const int a[], int numberUsed, int target)
     bool found = false;
     
     //Add your code here for Task 3.1
-    
+    while ((found == false) && (index < numberUsed)){
+        if (a[index] == target){
+            found = true;
+            
+        }else {
+            index++;
+        }
+        
+    }
+
     if (found)
         return index;
     else
@@ -40,16 +49,16 @@ int main( )
 
     fillArray(arr, DECLARED_SIZE, listSize);
 
-        cout << "Enter a number to search for: ";
-        cin >> target;
-
-        result = search(arr, listSize, target);
-        if (result == -1)
-            cout << target << " is not on the list.\n";
-        else
-            cout << target << " is stored in array position " 
-                 << result << endl
-                 << "(Remember: The first position is 0.)\n";
+    cout << "Enter a number to search for: ";
+    cin >> target;
+     
+    int result = search(arr, listSize, target);
+    if (result == -1)
+        cout << target << " is not on the list.\n";
+    else
+        cout << target << " is stored in array position " 
+            << result << endl
+            << "(Remember: The first position is 0.)\n";
 
     return 0;
 }

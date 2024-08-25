@@ -5,10 +5,24 @@ using namespace std;
 
 const int DECLARED_SIZE = 10;
 
-void fillArray(int a[], int size, int& numberUsed) {
+class ArraySearch {
+    public:
+    int arr[DECLARED_SIZE];
+    int target;
+    int listSize;
+
+    public:
+    void fillArray(int*, int , int&);
+    int run();
+    int search(int*, int, int);
+    int newTarget(int&);
+    void response(int);
+};
+
+void ArraySearch::fillArray(int a[], int size, int& numberUsed)
+{
     cout << "Enter up to " << size << " nonnegative integers.\n"
          << "Mark the end of the list with a negative number.\n";
-
     int next, index = 0;
     cin >> next;
     while ((next >= 0) && (index < size))
@@ -21,9 +35,7 @@ void fillArray(int a[], int size, int& numberUsed) {
     numberUsed = index;
 }
 
-
-
-int search(const int a[], int numberUsed, int target)
+int ArraySearch::search(int a[], int numberUsed, int target)
 {
     int index = 0; 
     bool found = false;
@@ -36,7 +48,6 @@ int search(const int a[], int numberUsed, int target)
         }else {
             index++;
         }
-        
     }
 
     if (found)
@@ -45,22 +56,26 @@ int search(const int a[], int numberUsed, int target)
         return -1;
 }
 
-int main( )
-{
-    int arr[DECLARED_SIZE], listSize, target;
-
-    fillArray(arr, DECLARED_SIZE, listSize);
-
+int ArraySearch::newTarget(int& target) {
     cout << "Enter a number to search for: ";
     cin >> target;
-     
-    int result = search(arr, listSize, target);
+}
+
+void ArraySearch::response(int result){
     if (result == -1)
         cout << target << " is not on the list.\n";
     else
         cout << target << " is stored in array position " 
             << result << endl
             << "(Remember: The first position is 0.)\n";
+}
 
+
+int ArraySearch::run(){
+    fillArray(arr, DECLARED_SIZE, listSize);
+    newTarget(target);
+    int result = search(arr, listSize, target);
+    response(result);
     return 0;
 }
+

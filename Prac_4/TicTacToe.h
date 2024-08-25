@@ -13,7 +13,7 @@ const int BOARDSIZE = 3;
 class TicTacToe {
 private:
 	int board[BOARDSIZE][BOARDSIZE];
-	int noOfMoves;
+
 public:
 	TicTacToe();
 	bool isValidMove(int, int);
@@ -23,13 +23,13 @@ public:
 	int gameStatus();
 	int play();
 	void displayBoard();
+	int noOfMoves;
 };
 
 TicTacToe::TicTacToe() {//How to call this function?
-	for (int row = 0; row < 3; row++)  // (TicTacToe object name).TicTacToe()
+	for (int row = 0; row < 3; row++)  // Called automatically when the object is constructed
 		for (int col = 0; col < 3; col++)
 			board[row][col] = 0;
-
 	noOfMoves = 0;
 }
 
@@ -43,10 +43,10 @@ void TicTacToe::displayBoard() {//Where to get the board data?
 				playerSymbol = 'X';
 			else if (board[i][j] == -1)
 				playerSymbol = 'O';
-			cout << setw(3) << playerSymbol;
+		 	cout << setw(3) << playerSymbol;
 			if (j != 2)
 				cout << " |";
-		}
+		 }
 		cout << endl;
 		if (i != 2)
 			cout << " ____|____|____" << endl << "     |    |    " << endl;

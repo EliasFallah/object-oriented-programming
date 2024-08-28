@@ -141,10 +141,10 @@ void NBTicTacToe::play() {
 		
 		int x, y;
 		if (playerSymbol == 'X') {
-			cout << "Enter move: ";
+			cout << "Player X Enter move: ";
 			getXMove(playerSymbol, x, y);
 		} else {
-            cout << "Enter move: ";
+            cout << "Player O Enter move: ";
 			getOMove(playerSymbol, x, y);
 		}
 

@@ -12,7 +12,7 @@ class Player {
         int value;
         char symbol;
         char type;
-        void getMove();
+        void getMove(int[3][3]);
 
 };
 
@@ -21,7 +21,9 @@ Player::Player() {
     srand(time(0));
 }
 
-void Player::getMove() {
+
+
+void Player::getMove(int board[3][3]) {
     int row, col;
     if (type == 'H') {
         cout << "Enter move for Player X: ";
@@ -35,7 +37,57 @@ void Player::getMove() {
         x = row;
         y = col;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // Debugging
+    cout << "Board accessable in getMove" << endl;
+    for (int i = 0; i < 3; i++) {
+        cout << " ";
+        for (int j = 0; j < 3; j++) {
+            cout << board[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
+
+
 
 
 

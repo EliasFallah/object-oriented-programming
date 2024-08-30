@@ -43,7 +43,6 @@ bool TicTacToe::isValidMove(int x, int y) {
 			}
 		} 		
 	} 
-	cout << "Invalid move, please try again" << endl;
 	return false;	
 	
 }

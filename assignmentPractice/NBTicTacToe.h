@@ -4,15 +4,15 @@
 class NBTicTacToe {
     public:
 		NBTicTacToe();
-        bool play(int, int, int);
+        void play(int, int, int);
 		void displayBoard();
 		void setCurrentBoard(int, int);
 		bool gameStatus();
 		bool gameComplete = false;
 		bool validMove;
-    private:
-        TicTacToe grid[3][3];
+		TicTacToe grid[3][3];
 		Coordinate currentBoard;
+    private:
 		bool drawGame;
 		
 };
@@ -133,7 +133,7 @@ bool NBTicTacToe::gameStatus(){
 	return retval;
 }
 
-bool NBTicTacToe::play(int x, int y, int player) {
+void NBTicTacToe::play(int x, int y, int player) {
 	validMove = grid[currentBoard.x][currentBoard.y].isValidMove(x, y);
 	if (validMove){
 		grid[currentBoard.x][currentBoard.y].addMove(x, y, player);

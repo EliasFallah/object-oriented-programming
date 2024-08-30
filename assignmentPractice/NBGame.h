@@ -50,6 +50,7 @@ void NBGame::start() {
             playerX.getMove();
             game.play(playerX.x, playerX.y, activePlayerValue);   
         } else {
+            playerO.setBoard(game.grid[game.currentBoard.x][game.currentBoard.y].board);
             playerO.getMove();
             game.play(playerO.x, playerO.y, activePlayerValue);
         }

@@ -21,7 +21,6 @@ int board[BOARDSIZE][BOARDSIZE];
 	void addMove(int, int, int);
 	int boardStatus();
 	int play();
-
 	int noOfMoves;
 };
 

@@ -19,7 +19,7 @@ int board[BOARDSIZE][BOARDSIZE];
 	TicTacToe();
 	bool isValidMove(int, int);
 	void addMove(int, int, int);
-	int gameStatus();
+	int boardStatus();
 	int play();
 
 	int noOfMoves;
@@ -44,15 +44,17 @@ bool TicTacToe::isValidMove(int x, int y) {
 			}
 		} 		
 	} 
+	cout << "Invalid move, please try again" << endl;
 	return false;	
-	return true;
+	
 }
 
 void TicTacToe::addMove(int x, int y, int player) {
-	board[x][y] = player;						   
+	board[x][y] = player;
+	noOfMoves++;						   
 }
 
-int TicTacToe::gameStatus() {
+int TicTacToe::boardStatus() {
 //Check rows for a win
 	for (int i = 0; i <=3; i++) {
 		if ((board[i][0] == board[i][1]) && (board[i][1] == board[i][2])){

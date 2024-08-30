@@ -4,18 +4,17 @@
 class NBTicTacToe {
     public:
 		NBTicTacToe();
-        void play(int, int, char);
-        void getXMove(char player, int&, int&);
-        void getOMove(char player, int&, int&);
+        bool play(int, int, int);
 		void displayBoard();
 		void setCurrentBoard(int, int);
 		bool gameStatus();
-		void initializeGame();
-		bool drawGame;
 		bool gameComplete = false;
+		bool validMove;
     private:
         TicTacToe grid[3][3];
 		Coordinate currentBoard;
+		bool drawGame;
+		
 };
 NBTicTacToe::NBTicTacToe() {
 	srand(time(0));
@@ -104,29 +103,6 @@ cout << endl;
 }
 
 
-
-
-void NBTicTacToe::getXMove(char player, int &x, int&y){
-        int row, col;
-        do{
-            row = rand() %3;
-            col = rand() %3;
-        } while (!grid[currentBoard.x][currentBoard.y].isValidMove(row, col));
-
-        x = row;
-        y = col;
-}
-
-void NBTicTacToe::getOMove(char player, int &x, int &y) {
-        int row, col;
-        do {
-            cin >> row >> col;
-            cout << endl;
-        } while (!grid[currentBoard.x][currentBoard.y].isValidMove(row - 1, col - 1));
-        x = row - 1;
-        y = col - 1;
-}
-
 // Set the current board to the last move
 void NBTicTacToe::setCurrentBoard(int x, int y) {
 	if (grid[x][y].noOfMoves == 9) {
@@ -157,17 +133,16 @@ bool NBTicTacToe::gameStatus(){
 	return retval;
 }
 
-void NBTicTacToe::initializeGame() {
-	srand(time(0));
-	displayBoard();
-}
-
-void NBTicTacToe::play(int x, int y, char player) {
+bool NBTicTacToe::play(int x, int y, int player) {
+	validMove = grid[currentBoard.x][currentBoard.y].isValidMove(x, y);
+	if (validMove){
 		grid[currentBoard.x][currentBoard.y].addMove(x, y, player);
+		cout << "Player " << player << "'s move (" << x + 1 << ", " << y + 1 << ")" << endl;
 		gameComplete = gameStatus();
 		// Set the current board to the last move
 		if (!gameComplete){
 			setCurrentBoard(x, y);
 			displayBoard();
 		} 
+	} 
 }

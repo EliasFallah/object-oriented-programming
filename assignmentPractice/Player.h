@@ -6,21 +6,34 @@
 
 class Player {
     public:
-        int row;
-        int col;
-        char playerSymbol;
-        char playerType;
-        void getMove(char player);
-        bool isValidMove(int x, int y);
+        Player();
+        int x;
+        int y;
+        int value;
+        char symbol;
+        char type;
+        void getMove();
+
 };
 
-void Player::getMove(char player) {
-    if (playerType == 'H') {
-        
+// add srand(time(0)); to the constructor
+Player::Player() {
+    srand(time(0));
+}
 
-    } else {
+void Player::getMove() {
+    int row, col;
+    if (type == 'H') {
+        cout << "Enter move for Player X: ";
+        cin >> row >> col;
+        cout << endl;
+        x = row - 1;
+        y = col - 1;
+    } else if (type == 'C') {
         row = rand() %3;
         col = rand() %3;
+        x = row;
+        y = col;
     }
 }
 

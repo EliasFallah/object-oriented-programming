@@ -2,6 +2,7 @@
 #include "Player.h"
 
 
+
 class NBGame
 {
 private:
@@ -13,22 +14,17 @@ public:
     void swapActivePlayer();
     char activePlayerValue = 1;
     private:
-        Player playerX;
-        Player playerO;
+        HumanPlayer playerX;
+        SmartPlayer playerO;
         NBTicTacToe game;
 };
 
 NBGame::NBGame() {
     srand(time(0));
-
 }
 
 void NBGame::chosePlayers() {
-    playerX.symbol = 'X';
-    playerX.type = 'H';
-    playerX.value = 1;
     playerO.symbol = 'O';
-    playerO.type = 'C';
     playerO.value = -1;
 }
 
@@ -58,5 +54,4 @@ void NBGame::start() {
             swapActivePlayer();
         }
     }
-    game.grid[game.currentBoard.x][game.currentBoard.y];
 }

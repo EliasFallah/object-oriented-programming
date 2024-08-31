@@ -7,7 +7,7 @@ class NBTicTacToe {
         void play(int, int, int);
 		void displayBoard();
 		void setCurrentBoard(int, int);
-		bool gameStatus();
+		bool gameStatus(int);
 		bool gameComplete = false;
 		bool validMove;
 		TicTacToe grid[3][3];
@@ -114,33 +114,30 @@ void NBTicTacToe::setCurrentBoard(int x, int y) {
 	}
 }
 
-bool NBTicTacToe::gameStatus(){
-	bool retval = true;
+bool NBTicTacToe::gameStatus(int pValue){
+
 	// If the game is over print the winning board
-	if (grid[currentBoard.x][currentBoard.y].boardStatus() == 1) {
+	if (grid[currentBoard.x][currentBoard.y].boardStatus(pValue)) {
 		displayBoard();
-		cout << "Player X wins!" << endl;
-	} else if (grid[currentBoard.x][currentBoard.y].boardStatus() == -1) {
-		displayBoard();
-		cout << "Player O wins!" << endl;
-		// Check if drawGame has been set to false in the draw board function
-	} else if (drawGame == true) {
-		displayBoard();
-		cout << "Draw game!" << endl;
-	} else { // If the game is not over set the return value to false
-		retval = false;
-	}
-	return retval;
+		if (pValue == 1){
+			cout << "Player X wins!" << endl;
+		} else{
+			cout << "Player O wins!" << endl;
+		}
+		return true;
+	}  
+	// If the game is not over set the return value to false
+	return false;
 }
 
-void NBTicTacToe::play(int x, int y, int player) {
+void NBTicTacToe::play(int x, int y, int pValue) {
 	validMove = grid[currentBoard.x][currentBoard.y].isValidMove(x, y);
 	if (validMove){
-		grid[currentBoard.x][currentBoard.y].addMove(x, y, player);
-		cout << "Player " << player << "'s move (" << x + 1 << ", " << y + 1 << ")" << endl;
-		gameComplete = gameStatus();
+		grid[currentBoard.x][currentBoard.y].addMove(x, y, pValue);
+		cout << "Player " << pValue << "'s move (" << x + 1 << ", " << y + 1 << ")" << endl;
+		gameComplete = gameStatus(pValue);
 		// Set the current board to the last move
-		if (!gameComplete){
+		if (!gameComplete) {
 			setCurrentBoard(x, y);
 			displayBoard();
 		} 

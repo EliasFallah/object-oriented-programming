@@ -105,6 +105,7 @@ cout << endl;
 
 // Set the current board to the last move
 void NBTicTacToe::setCurrentBoard(int x, int y) {
+	srand(time(0));
 	if (grid[x][y].noOfMoves == 9) {
 		currentBoard.x = rand() % 3;
 		currentBoard.y = rand() % 3;

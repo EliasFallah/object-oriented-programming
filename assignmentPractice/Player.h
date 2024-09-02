@@ -12,7 +12,8 @@ class Player {
         int value;
         char symbol;
         int board[3][3];
-        void setBoard(int [3][3]);  
+        
+        void setBoard(TicTacToe);  
 };
 
 // add srand(time(0)); to the constructor
@@ -20,13 +21,7 @@ Player::Player() {
     srand(time(0));
 }
 
-void Player::setBoard(int gameBoard[3][3]) {
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
-            board[i][j] = gameBoard[i][j];
-        }
-    }
-}
+
 
 class RandomPlayer : public Player {
     public:
@@ -71,6 +66,7 @@ class SmartPlayer : public Player {
     public:
         SmartPlayer();
         void getMove();
+        NBTicTacToe game;
     private:
         bool winningMove();
         bool checkLosingMove();
@@ -85,15 +81,15 @@ SmartPlayer::SmartPlayer() {
 
 bool SmartPlayer::checkRow(int value) {
     for (int i = 0; i < 3; i++) {
-        if (board[i][0] == value && board[i][1] == value) {
+        if (game.grid[game.currentBoard.x][game.currentBoard.y].board[i][0]  == value && game.grid[game.currentBoard.x][game.currentBoard.y].board[i][1] == value) {
             x = i;
             y = 2;
             return true;
-        } else if ( board[i][0] == value && board[i][2] == value) {
+        } else if ( game.grid[game.currentBoard.x][game.currentBoard.y].board[i][0] == value && game.grid[game.currentBoard.x][game.currentBoard.y].board[i][2] == value) {
             x = i;
             y = 1;
             return true;
-        }else if (board[i][1] == value && board[i][2] == value) {
+        }else if (game.grid[game.currentBoard.x][game.currentBoard.y].board[i][1] == value && game.grid[game.currentBoard.x][game.currentBoard.y].board[i][2] == value) {
             x = i;
             y = 0;
             return true;
@@ -104,15 +100,15 @@ bool SmartPlayer::checkRow(int value) {
 
 bool SmartPlayer::checkColumn(int value) {
     for (int i = 0; i < 3; i++) {
-        if (board[0][i] == value && board[1][i] == value) {
+        if (game.grid[game.currentBoard.x][game.currentBoard.y].board[0][i] == value && game.grid[game.currentBoard.x][game.currentBoard.y].board[1][i] == value) {
             x = 2;
             y = i;
             return true;
-        } else if (board[0][i] == value && board[2][i] == value) {
+        } else if (game.grid[game.currentBoard.x][game.currentBoard.y].board[0][i] == value && game.grid[game.currentBoard.x][game.currentBoard.y].board[2][i] == value) {
             x = 1;
             y = i;
             return true;
-        } else if (board[1][i] == value && board[2][i] == value) {
+        } else if (game.grid[game.currentBoard.x][game.currentBoard.y].board[1][i] == value && game.grid[game.currentBoard.x][game.currentBoard.y].board[2][i] == value) {
             x = 0;
             y = i;
             return true;
@@ -122,27 +118,27 @@ bool SmartPlayer::checkColumn(int value) {
 }
 
 bool SmartPlayer::checkDiagnol(int value) {
-    if (board[0][0] == value && board[1][1] == value) {
+    if (game.grid[game.currentBoard.x][game.currentBoard.y].board[0][0] == value && game.grid[game.currentBoard.x][game.currentBoard.y].board[1][1] == value) {
         x = 2;
         y = 2;
         return true;
-    } else if (board[0][0] == value && board[2][2] == value) {
+    } else if (game.grid[game.currentBoard.x][game.currentBoard.y].board[0][0] == value && game.grid[game.currentBoard.x][game.currentBoard.y].board[2][2] == value) {
         x = 1;
         y = 1;
         return true;
-    } else if (board[1][1] == value && board[2][2] == value) {
+    } else if (game.grid[game.currentBoard.x][game.currentBoard.y].board[1][1] == value && game.grid[game.currentBoard.x][game.currentBoard.y].board[2][2] == value) {
         x = 0;
         y = 0;
         return true;
-    } else if (board[0][2] == value && board[1][1] == value) {
+    } else if (game.grid[game.currentBoard.x][game.currentBoard.y].board[0][2] == value && game.grid[game.currentBoard.x][game.currentBoard.y].board[1][1] == value) {
         x = 2;
         y = 0;
         return true;
-    } else if (board[0][2] == value && board[2][0] == value) {
+    } else if (game.grid[game.currentBoard.x][game.currentBoard.y].board[0][2] == value && game.grid[game.currentBoard.x][game.currentBoard.y].board[2][0] == value) {
         x = 1;
         y = 1;
         return true;
-    } else if (board[1][1] == value && board[2][0] == value) {
+    } else if (game.grid[game.currentBoard.x][game.currentBoard.y].board[1][1] == value && game.grid[game.currentBoard.x][game.currentBoard.y].board[2][0] == value) {
         x = 0;
         y = 2;
         return true;
@@ -191,10 +187,10 @@ bool SmartPlayer::randomMove() {
 
 void SmartPlayer::getMove() {
     // Check for empty winning move
-    if (winningMove() && board[x][y] == 0) {
+    if (winningMove() && game.grid[game.currentBoard.x][game.currentBoard.y].board[x][y] == 0) {
         return;
     // Check for empty losing move
-    } else if (checkLosingMove() && board[x][y] == 0) {
+    } else if (checkLosingMove() && game.grid[game.currentBoard.x][game.currentBoard.y].board[x][y] == 0) {
         return;
     } else { // Make a random move
         randomMove();

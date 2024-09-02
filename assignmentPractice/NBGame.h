@@ -42,11 +42,10 @@ void NBGame::start() {
     game.displayBoard();
     while (!game.gameComplete) {
         if(activePlayerValue == playerX.value) {
-            playerX.setBoard(game.grid[game.currentBoard.x][game.currentBoard.y].board);
             playerX.getMove();
             game.play(playerX.x, playerX.y, activePlayerValue);   
         } else {
-            playerO.setBoard(game.grid[game.currentBoard.x][game.currentBoard.y].board);
+            playerO.game = game;
             playerO.getMove();
             game.play(playerO.x, playerO.y, activePlayerValue);
         }

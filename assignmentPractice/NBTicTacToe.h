@@ -133,12 +133,12 @@ void NBTicTacToe::setCurrentBoard(int x, int y) {
 
 void NBTicTacToe::play() {
 	srand(time(0));
-	displayBoard();
+	
 	int player = 1;
 	int done = 0;
 	while (done == 0) {
 		char playerSymbol = (player == 1) ? 'X' : 'O';
-		
+		displayBoard();
 		int x, y;
 		if (playerSymbol == 'X') {
 			cout << "Player X Enter move: ";
@@ -151,9 +151,12 @@ void NBTicTacToe::play() {
 		grid[currentBoard.x][currentBoard.y].addMove(x, y, player);
 		grid[currentBoard.x][currentBoard.y].noOfMoves++;
 		
-		displayBoard();
-
 		done = grid[currentBoard.x][currentBoard.y].gameStatus();
+		// print the board if the game is completed to display the highlighted winning game
+		if (done != 0){
+			displayBoard();
+		}
+		
 		if (done == 1) {
 			cout << "Player X wins!" << endl;
 		} else if (done == -1) {
@@ -166,10 +169,8 @@ void NBTicTacToe::play() {
 			player = -1;
 		else
 			player = 1;
-		if (done == 0) {
-			setCurrentBoard(x, y);
-			displayBoard();
-		}
+
+		setCurrentBoard(x, y);
 	}
 
 }

@@ -49,7 +49,9 @@ bool TicTacToe::isValidMove(int x, int y) {
 }
 
 void TicTacToe::addMove(int x, int y, int player) {
-	board[x][y] = player;						   
+	board[x][y] = player;		
+	noOfMoves++;
+	cout << noOfMoves << endl;				   
 }
 
 int TicTacToe::gameStatus() {

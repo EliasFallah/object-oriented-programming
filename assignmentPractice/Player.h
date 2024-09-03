@@ -12,12 +12,25 @@ class Player {
         int x;
         int y;
         int value;
-        char symbol;;  
+        int enemyValue;
+        char symbol;
+        void setValues(int);  
 };
 
 // add srand(time(0)); to the constructor
 Player::Player() {
     srand(time(0));
 };
+
+void Player::setValues(int value) {
+    this->value = value;
+    if (value == 1) {
+        enemyValue = -1;
+        symbol = 'X';
+    } else {
+        enemyValue = 1;
+        symbol = 'O';
+    }
+}
 
 #endif // PLAYER_H

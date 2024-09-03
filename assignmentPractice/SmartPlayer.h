@@ -1,138 +1,245 @@
-#include "Player.h"
+#include "RandomPlayer.h"
 #include "NBTicTacToe.h"
 
-class SmartPlayer : public Player {
-    public:
-        SmartPlayer();
-        void getMove();
-        NBTicTacToe game;
-    private:
-        bool winningMove();
-        bool checkLosingMove();
-        bool randomMove();
-        bool checkColumn(int);
-        bool checkRow(int);
-        bool checkDiagnol(int);
+class SmartPlayer : public RandomPlayer
+{
+public:
+    SmartPlayer();
+    void getMove();
+    NBTicTacToe currentNBGame;
+    TicTacToe activeGame;
+    TicTacToe nextGame;
+    void getSmartRandomMove(TicTacToe);
+
+private:
+    bool checkColumn(int, TicTacToe);
+    bool checkRow(int, TicTacToe);
+    bool checkDiagnol(int, TicTacToe);
+    void setCurrentBoard();
+    void setNextBoard(int, int);
+    bool checkMove(int, TicTacToe);
+    bool checkLoosingMove(TicTacToe, int, int);
 };
 
-
-SmartPlayer::SmartPlayer() {
+SmartPlayer::SmartPlayer()
+{
 }
 
-bool SmartPlayer::checkRow(int value) {
-    for (int i = 0; i < 3; i++) {
-        if (game.grid[game.currentBoard.x][game.currentBoard.y].board[i][0]  == value && game.grid[game.currentBoard.x][game.currentBoard.y].board[i][1] == value) {
+void SmartPlayer::setCurrentBoard()
+{
+    activeGame = currentNBGame.grid[currentNBGame.currentBoard.x][currentNBGame.currentBoard.y];
+}
+
+void SmartPlayer::setNextBoard(int x, int y)
+{
+    nextGame = currentNBGame.grid[x][y];
+}
+
+bool SmartPlayer::checkRow(int value, TicTacToe game)
+{
+    for (int i = 0; i < 3; i++)
+    {
+        if (game.board[i][0] == value && game.board[i][1] == value)
+        {
             x = i;
             y = 2;
-            return true;
-        } else if ( game.grid[game.currentBoard.x][game.currentBoard.y].board[i][0] == value && game.grid[game.currentBoard.x][game.currentBoard.y].board[i][2] == value) {
+            if (game.board[x][y] == 0){
+                if (!checkLoosingMove(game, x, y))
+                    {
+                        return true;
+                    }
+            }
+        }
+        else if (game.board[i][0] == value && game.board[i][2] == value)
+        {
             x = i;
             y = 1;
-            return true;
-        }else if (game.grid[game.currentBoard.x][game.currentBoard.y].board[i][1] == value && game.grid[game.currentBoard.x][game.currentBoard.y].board[i][2] == value) {
+            if (game.board[x][y] == 0){
+                if (!checkLoosingMove(game, x, y))
+                    {
+                        return true;
+                    }
+            }
+        }
+        else if (game.board[i][1] == value && game.board[i][2] == value)
+        {
             x = i;
             y = 0;
-            return true;
+            if (game.board[x][y] == 0){
+                if (!checkLoosingMove(game, x, y))
+                    {
+                        return true;
+                    }
+            }
         }
     }
     return false;
 }
 
-bool SmartPlayer::checkColumn(int value) {
-    for (int i = 0; i < 3; i++) {
-        if (game.grid[game.currentBoard.x][game.currentBoard.y].board[0][i] == value && game.grid[game.currentBoard.x][game.currentBoard.y].board[1][i] == value) {
+bool SmartPlayer::checkColumn(int value, TicTacToe game)
+{
+    for (int i = 0; i < 3; i++)
+    {
+        if (game.board[0][i] == value && game.board[1][i] == value)
+        {
             x = 2;
             y = i;
-            return true;
-        } else if (game.grid[game.currentBoard.x][game.currentBoard.y].board[0][i] == value && game.grid[game.currentBoard.x][game.currentBoard.y].board[2][i] == value) {
+            if (game.board[x][y] == 0){
+                if (!checkLoosingMove(game, x, y))
+                    {
+                        return true;
+                    }
+            }
+        }
+        else if (game.board[0][i] == value && game.board[2][i] == value)
+        {
             x = 1;
             y = i;
-            return true;
-        } else if (game.grid[game.currentBoard.x][game.currentBoard.y].board[1][i] == value && game.grid[game.currentBoard.x][game.currentBoard.y].board[2][i] == value) {
+            if (game.board[x][y] == 0){
+                if (!checkLoosingMove(game, x, y))
+                    {
+                        return true;
+                    }
+            }
+        }
+        else if (game.board[1][i] == value && game.board[2][i] == value)
+        {
             x = 0;
             y = i;
-            return true;
+            if (game.board[x][y] == 0){
+                if (!checkLoosingMove(game, x, y))
+                    {
+                        return true;
+                    }
+            }
         }
     }
     return false;
 }
 
-bool SmartPlayer::checkDiagnol(int value) {
-    if (game.grid[game.currentBoard.x][game.currentBoard.y].board[0][0] == value && game.grid[game.currentBoard.x][game.currentBoard.y].board[1][1] == value) {
+bool SmartPlayer::checkDiagnol(int value, TicTacToe game)
+{
+    if (game.board[0][0] == value && game.board[1][1] == value)
+    {
         x = 2;
         y = 2;
-        return true;
-    } else if (game.grid[game.currentBoard.x][game.currentBoard.y].board[0][0] == value && game.grid[game.currentBoard.x][game.currentBoard.y].board[2][2] == value) {
+         if (game.board[x][y] == 0){
+            if (!checkLoosingMove(game, x, y))
+                {
+                    return true;
+                }
+        }
+    }
+    else if (game.board[0][0] == value && game.board[2][2] == value)
+    {
         x = 1;
         y = 1;
-        return true;
-    } else if (game.grid[game.currentBoard.x][game.currentBoard.y].board[1][1] == value && game.grid[game.currentBoard.x][game.currentBoard.y].board[2][2] == value) {
+        if (game.board[x][y] == 0){
+            if (!checkLoosingMove(game, x, y))
+                {
+                    return true;
+                }
+        }
+    }
+    else if (game.board[1][1] == value && game.board[2][2] == value)
+    {
         x = 0;
         y = 0;
-        return true;
-    } else if (game.grid[game.currentBoard.x][game.currentBoard.y].board[0][2] == value && game.grid[game.currentBoard.x][game.currentBoard.y].board[1][1] == value) {
+        if (game.board[x][y] == 0){
+            if (!checkLoosingMove(game, x, y))
+                {
+                    return true;
+                }
+        }
+    }
+    else if (game.board[0][2] == value && game.board[1][1] == value)
+    {
         x = 2;
         y = 0;
-        return true;
-    } else if (game.grid[game.currentBoard.x][game.currentBoard.y].board[0][2] == value && game.grid[game.currentBoard.x][game.currentBoard.y].board[2][0] == value) {
+        if (game.board[x][y] == 0){
+            if (!checkLoosingMove(game, x, y))
+                {
+                    return true;
+                }
+        }
+    }
+    else if (game.board[0][2] == value && game.board[2][0] == value)
+    {
         x = 1;
         y = 1;
-        return true;
-    } else if (game.grid[game.currentBoard.x][game.currentBoard.y].board[1][1] == value && game.grid[game.currentBoard.x][game.currentBoard.y].board[2][0] == value) {
+        if (game.board[x][y] == 0){
+            if (!checkLoosingMove(game, x, y))
+                {
+                    return true;
+                }
+        }
+    }
+    else if (game.board[1][1] == value && game.board[2][0] == value)
+    {
         x = 0;
         y = 2;
-        return true;
+        if (game.board[x][y] == 0){
+            if (!checkLoosingMove(game, x, y))
+                {
+                    return true;
+                }
+        }
     }
     return false;
 }
 
-
-
-
-bool SmartPlayer::winningMove() {
-    // Check rows for a win
-    if (checkRow(value)) {
+// Check if the player has a winning move
+bool SmartPlayer::checkMove(int value, TicTacToe game)
+{
+    if (checkRow(value, game))
+    {
         return true;
-    } else if (checkColumn(value)) {
+    }
+    else if (checkColumn(value, game))
+    {
         return true;
-    } else if (checkDiagnol(value)) {
+    }
+    else if (checkDiagnol(value, game))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+// Check if the player has a losing move at the next position
+bool SmartPlayer::checkLoosingMove (TicTacToe game, int storedX, int storedY) {
+    setNextBoard(x, y);
+    if (checkMove(enemyValue, nextGame)) {
         return true;
     } else {
+        x = storedX;
+        y = storedY;
         return false;
     }
 }
 
-bool SmartPlayer::checkLosingMove() {
-    int otherValue;
-    (value == 1) ? otherValue = -1 : otherValue = 1;
-    if (checkRow(otherValue)) {
-        return true;
-    } else if (checkColumn(otherValue)) {
-        return true;
-    } else if (checkDiagnol(otherValue)) {
-        return true;
-    } else {
-        return false;
-    }
+void SmartPlayer::getSmartRandomMove(TicTacToe game) {
+    do {
+        getRandomMove();
+    } while (checkLoosingMove(game, x, y));
 }
 
-bool SmartPlayer::randomMove() {
-    int row, col;
-    row = rand() %3;
-    col = rand() %3;
-    x = row;
-    y = col;
-    return false;
-}
-
-void SmartPlayer::getMove() {
+void SmartPlayer::getMove()
+{
+    setCurrentBoard();
     // Check for empty winning move
-    if (winningMove() && game.grid[game.currentBoard.x][game.currentBoard.y].board[x][y] == 0) {
+    if (checkMove(value, activeGame))
+    {
         return;
-    // Check for empty losing move
-    } else if (checkLosingMove() && game.grid[game.currentBoard.x][game.currentBoard.y].board[x][y] == 0) {
+    }  // Check for enemy winning move in active game
+    else if (checkMove(enemyValue, activeGame))
+    {
         return;
-    } else { // Make a random move
-        randomMove();
+    }
+    else
+    { // Make a random move
+        getSmartRandomMove(activeGame);
     }
 }

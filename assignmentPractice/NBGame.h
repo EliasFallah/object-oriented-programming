@@ -27,8 +27,8 @@ NBGame::NBGame() {
 }
 
 void NBGame::chosePlayers() {
-    playerO.symbol = 'O';
-    playerO.value = -1;
+    playerX.setValues(1);
+    playerO.setValues(-1);
 }
 
 void NBGame::swapActivePlayer() {
@@ -48,7 +48,7 @@ void NBGame::start() {
             playerX.getMove();
             game.play(playerX.x, playerX.y, activePlayerValue);   
         } else {
-            playerO.game = game;
+            playerO.currentNBGame = game;
             playerO.getMove();
             game.play(playerO.x, playerO.y, activePlayerValue);
         }

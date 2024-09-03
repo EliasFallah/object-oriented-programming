@@ -10,8 +10,7 @@ class HumanPlayer : public Player {
 
 // Human player is always X
 HumanPlayer::HumanPlayer() {
-    symbol = 'X';
-    value = 1;
+    
 }
 
 void HumanPlayer::getMove() {

@@ -1,5 +1,8 @@
 #include "NBTicTacToe.h"
 #include "Player.h"
+#include "HumanPlayer.h"
+#include "SmartPlayer.h"
+#include "RandomPlayer.h"
 
 
 

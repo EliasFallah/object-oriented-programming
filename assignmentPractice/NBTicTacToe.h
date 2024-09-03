@@ -1,3 +1,6 @@
+#ifndef NBTicTacToe_H
+#define NBTicTacToe_H
+
 #include "TicTacToe.h"
 #include "Focus.h"
 
@@ -144,3 +147,5 @@ void NBTicTacToe::play(int x, int y, int pValue) {
 		} 
 	} 
 }
+
+#endif // NBTicTacToe_H

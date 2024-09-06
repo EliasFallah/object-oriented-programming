@@ -5,20 +5,6 @@
 using namespace std;
 
 
-
-const int NUMBER_OF_PLANTS = 4;
-
-void inputData(int a[]);
-
-void graph(const int a[]);
-
-void getTotal(int&);
-//Reads nonnegative integers from the keyboard
-
-void printAsterisks(int n);
-//Prints n asterisks to the screen.
-
-
 int main( )
 {
     int plants;

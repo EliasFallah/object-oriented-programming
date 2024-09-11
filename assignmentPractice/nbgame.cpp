@@ -4,10 +4,10 @@
 
 using namespace std;
 
-#include "NBTicTacToe.h"
+#include "NBGame.h"
 
 int main() {
-	NBTicTacToe game(0, 0);
-	game.play();   
+	NBGame game;
+	game.start();
 	return 0;
 }

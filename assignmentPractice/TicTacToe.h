@@ -19,9 +19,8 @@ int board[BOARDSIZE][BOARDSIZE];
 	TicTacToe();
 	bool isValidMove(int, int);
 	void addMove(int, int, int);
-	int boardStatus();
+	bool boardStatus(int);
 	int play();
-
 	int noOfMoves;
 };
 
@@ -34,19 +33,11 @@ TicTacToe::TicTacToe() {
 
 bool TicTacToe::isValidMove(int x, int y) {
 	// Checks x is in correct range
-	if ((x >= 0) && (x < 3)) { //Add your code here)
-		// Checks y is in correct range
-		if ((y >= 0) && (y < 3)){
-			// Checks position has not already been filled
-			if ((board[x][y] == 0)) {
-				// return value method changed to allow for nested if statements and error message
-				return true;
-			}
-		} 		
-	} 
-	cout << "Invalid move, please try again" << endl;
-	return false;	
-	
+	if (((x >= 0) && (x < 3)) && ((y >= 0) && (y < 3)) && board[x][y] == 0) { //Add your code here)
+		return true;
+	}else {
+		return false;
+	}		 
 }
 
 void TicTacToe::addMove(int x, int y, int player) {
@@ -54,35 +45,26 @@ void TicTacToe::addMove(int x, int y, int player) {
 	noOfMoves++;						   
 }
 
-int TicTacToe::boardStatus() {
-//Check rows for a win
+bool TicTacToe::boardStatus(int pValue) {
+	//Check rows for a win
 	for (int i = 0; i <=3; i++) {
-		if ((board[i][0] == board[i][1]) && (board[i][1] == board[i][2])){
-			return board[i][0];
+		// Check rows for a win
+		if ((board[i][0] == pValue) && (board[i][1] == pValue) && (board[i][2] == pValue)){
+			return true;
+		} // Check columns for a win
+		if ((board[0][i] == pValue) && (board[1][i] == pValue) && (board[2][i] == pValue)){
+			return true;
 		}
 	}
-
-//Check columns for a win
-	for (int i = 0; i <= 3; i++) {
-		if ((board[0][i] == board[1][i]) && (board[1][i] == board[2][i])){
-			return board[0][i];
-		}
-	}
-
-//Check diagonals for a win
+	//Check diagonals for a win
 	// Checks left to right diagonal
-	if ((board[0][0] == board[1][1]) && (board[1][1] == board[2][2])){
-		return board[0][0];
-	}
+	if ((board[0][0] == pValue) && (board[1][1] == pValue) && (board[2][2] == pValue)){
+		return true;
+	}else if ((board[0][2] == pValue) && (board[1][1] == pValue) && (board[2][0] == pValue)){
 	// Checks right to left diagonal
-	if ((board[0][2] == board[1][1]) && (board[1][1] == board[2][0])){
-		return board[0][2];
+		return true;
 	}
-
-	if (noOfMoves >= 9)
-		return 2;
-
-	return 0;
+	return false;
 }
 
 #endif /* TICTACTOE_H_ */

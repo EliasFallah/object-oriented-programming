@@ -10,7 +10,7 @@ using namespace std;
 int main() {
 srand(time(0));
 ofstream chargingDemands("NewChargingDemands.txt");
-for (int i = 1; i < 6; i++) {
+for (int i = 1; i < 14; i++) {
     string newDemands = "[";
     newDemands += to_string(i) + ",";
     newDemands += to_string(rand() % 12) + ","; 

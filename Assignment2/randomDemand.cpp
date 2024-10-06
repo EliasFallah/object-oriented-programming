@@ -2,6 +2,7 @@
 #include <string>
 #include "ChargingStation.h"
 #include "Vehicle.h"
+#include "DemandGenerator.h"
 
 using namespace std;
 
@@ -16,5 +17,6 @@ int main() {
         cout << v.farthestCity() << endl;
     }
 
+    DemandGenerator dg;
     return 0;
 }

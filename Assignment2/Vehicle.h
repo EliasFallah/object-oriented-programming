@@ -11,17 +11,15 @@ class Vehicle {
         int destinationID;
         int capacityRange;
         int remainRange;
-        Vehicle(int);
+        int firstRecharge = 0;
+        int secondRecharge = 0;
+        Vehicle();
         int farthestCity();
+
 };
 
-Vehicle::Vehicle(int vehicleID) {
-    this->vehicleID = vehicleID;
-    this->destinationID = rand() % NUM_CITIES;
-    this->capacityRange = rand() % 201 + 350;
-    this->remainRange = rand() % (capacityRange - MIN_REMAIN_RANGE) + MIN_REMAIN_RANGE;
-    cout << vehicleID << " " << currentCityID << " " << destinationID << " " << capacityRange << " " << remainRange << endl;
-}
+Vehicle::Vehicle() {
+};
 
 int Vehicle::farthestCity() {
         int cumulativeDistance = 0;
@@ -32,4 +30,4 @@ int Vehicle::farthestCity() {
         cumulativeDistance += distanceMap[i];
     }
     return destinationID;
-}
+};

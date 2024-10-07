@@ -11,7 +11,6 @@ int main() {
     ca.displayChargers();
     ca.allocateCharging();
     ca.printCharging();
-    
 
     return 0;
 }

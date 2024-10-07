@@ -12,17 +12,15 @@ using namespace std;
 
 class ChargingAllocation {
     public:
-    int i = 1;
-        vector<Vehicle> vehicles;
-        vector<Vehicle>::iterator it;
-        vector<ChargingStation> chargers;
-        
         ChargingAllocation();
         void displayVehicles();
         void displayChargers();
         void allocateCharging();
         void printCharging();
     private:
+        vector<Vehicle> vehicles;
+        vector<Vehicle>::iterator it;
+        vector<ChargingStation> chargers;
         void generateVehicles();
         void generateChargers();
         void displayQueue();
@@ -31,16 +29,14 @@ class ChargingAllocation {
 ChargingAllocation::ChargingAllocation() {
     generateVehicles();
     generateChargers();
-    ChargingStation testCharger(i);
     }
 
 void ChargingAllocation::generateVehicles() {
     string lineText;
     string intText;
-    int vehicleID = 1;
     ifstream chargingDemands("NewChargingDemands.txt");
     while (getline(chargingDemands, lineText)) {
-        Vehicle v(vehicleID);
+        Vehicle v;
         stringstream ss(lineText);
         int i = 0;
         while (getline(ss, intText, ',')) {
@@ -61,7 +57,6 @@ void ChargingAllocation::generateVehicles() {
             i++;
         }
         vehicles.push_back(v);
-        vehicleID ++;
     }
 }
 

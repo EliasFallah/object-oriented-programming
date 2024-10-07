@@ -13,13 +13,12 @@ class Vehicle {
         int remainRange;
         int firstRecharge = 0;
         int secondRecharge = 0;
-        Vehicle(int);
+        Vehicle();
         int farthestCity();
-        void printVehicle();
+
 };
 
-Vehicle::Vehicle(int vehicleID) {
-    this->vehicleID = vehicleID;
+Vehicle::Vehicle() {
 };
 
 int Vehicle::farthestCity() {
@@ -32,7 +31,3 @@ int Vehicle::farthestCity() {
     }
     return destinationID;
 };
-
-void Vehicle ::printVehicle() {
-    cout << vehicleID << ", " << currentCityID << ", " << destinationID << ", " << capacityRange << ", " << remainRange << endl;
-}

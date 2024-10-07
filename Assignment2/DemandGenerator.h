@@ -9,14 +9,14 @@ using namespace std;
 
 class DemandGenerator {
     public: 
+        DemandGenerator();
+    private:        
         string fileName;
         int numDemands;
         int vehicleID;
         int destinationID;
         int capacityRange;
         int remainRange;
-        DemandGenerator();
-    private:
         void newDemand(int);
 };
 

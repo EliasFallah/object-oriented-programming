@@ -15,7 +15,7 @@ class ChargingStation {
         ChargingStation(int);
         int getDistanceToSydney(int cityID);
         string nameofCity(int cityID);
-         double calculateQueueLength();
+        double calculateQueueLength();
 };
 
 ChargingStation::ChargingStation(int cityID) {

@@ -10,22 +10,34 @@ class ChargingStation {
         string cityName;
         int distanceToLastCity;
         int numberOfChargers;
+        int distanceToSydney;
+        int queueLength = 0;
         ChargingStation(int);
-        int distanceToSydney(int);
+        int getDistanceToSydney(int cityID);
+        string nameofCity(int cityID);
+         double calculateQueueLength();
 };
 
 ChargingStation::ChargingStation(int cityID) {
     this->cityID = cityID;
-    this->cityName = nameMap[cityID];
+    this->cityName = nameofCity(cityID);
     this->distanceToLastCity = distanceMap[cityID];
+    this->distanceToSydney = getDistanceToSydney(cityID);
     this->numberOfChargers = chargersMap[cityID];
-    cout << cityID << " " << cityName << " " << distanceToLastCity << " " << numberOfChargers << endl; 
 }
 
-int ChargingStation::distanceToSydney(int cityID) {
+int ChargingStation::getDistanceToSydney(int cityID) {
     int cumulativeDistance = 0;
     for (int i = 0; i <=  cityID; i++) {
         cumulativeDistance += distanceMap[i];
     }
     return cumulativeDistance;
+}
+
+string ChargingStation::nameofCity(int cityID) {
+    return nameMap[cityID];
+}
+
+double ChargingStation::calculateQueueLength() {
+    return ((double)queueLength * 0.5) / (double)numberOfChargers;
 }

@@ -7,21 +7,25 @@
 using namespace std;
 
 class Date {
+   //  TODO: Overloaded
 	friend ostream &operator<<( ostream &, const Date & );
 private:
 	int day;
 	int month;
 	int year;
-    static const int days[]; // array of days per month
-    void helpIncrement(); // utility function for incrementing date
+   static const int days[]; // array of days per month
+   void helpIncrement(); // utility function for incrementing date
 
 public:
 	Date(int=1, int=1, int=0);
 	void setDate(int,int,int);
 	bool leapYear( int ) const; // is date in a leap year?
     bool endOfMonth( int ) const; // is date at the end of month?
+   //  TODO: Overloaded
     Date &operator++(); // prefix increment operator
+   //  TODO: Overloaded
     Date operator++( int ); // postfix increment operator
+   //  TODO: Overloaded
     const Date &operator+=( int ); // add days, modify object
 
 	void showdate();

@@ -75,14 +75,19 @@ void addressBookType::saveData()
 	outFile.open("dataOut.txt");
 
     string street, city, state, zip, phone, pStatus;
-
     for (int i = 0; i < length; i++)
     {
     	//Add code here to store all address data in list into the file dataOut.txt
-        
-    outFile << "TBA" << endl;
-
-    }
+		outFile << list[i].getFirstName() << " " << list[i].getLastName() << endl;
+		outFile << list[i].getDOB().getDay() << " " << list[i].getDOB().getMonth() << " " << list[i].getDOB().getYear() << endl;
+		list[i].getAddress().getDetails(street, city, state, zip);
+		outFile << street << endl;
+		outFile << city << endl;
+		outFile << state << endl;
+		outFile << zip << endl;
+		outFile << list[i].getPhoneNumber() << endl;
+		outFile << list[i].getStatus() << endl;
+	}
     outFile.close();
 }
 

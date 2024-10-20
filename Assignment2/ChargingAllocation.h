@@ -101,9 +101,6 @@ void ChargingAllocation::allocateCharging() {
                 it->currentCityID = it->secondRecharge;
                 it->remainRange = it->capacityRange;
             }
-        } else {
-            vehicles.erase(it);
-            it--;
         }
     }
 }
